@@ -1,13 +1,12 @@
-<%@page import="member.loginDAO"%>
+<%@page import="member.loginController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Subway!!</title>
+<title>Insert title here</title>
 </head>
 <body>
-<% loginDAO dao = new loginDAO(application); %>
 </body>
 </html>
