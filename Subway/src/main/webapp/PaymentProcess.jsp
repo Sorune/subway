@@ -25,27 +25,17 @@ String user_phone = (String)session.getAttribute("user_phone");
 
 
 //DTO 객체 생성
-CartDTO dto = new CartDTO();
+CartDTO DTO = new CartDTO();
 
-dto.setOrder_num(order_num);
-dto.setMenu_order(Integer.parseInt(menu_order));
-dto.setOrder_kind(order_kind);
-dto.setPay_kind(pay_kind);
-
-dto.setMenu_name(menu_name);
-dto.setMenu_qty(Integer.parseInt(menu_qty));
-dto.setMenu_topping(menu_topping);
-dto.setMenu_total_price(Integer.parseInt(menu_tatal_price));
-
-dto.setUser_id(user_id);
-dto.setUser_name(user_name);
-dto.setUser_add(user_add);
-dto.setUser_phone(user_phone);
+DTO.setOrder_num(order_num);
+DTO.setUser_id(user_id);
+DTO.setOrder_kind(order_kind);
+DTO.setPay_kind(pay_kind);
 
 
 //DAO를 통해 DB에 전달
 CartDAO dao = new CartDAO();
-int result = dao.paymentInfo(dto);
+int result = dao.paymentInfo(DTO);
 
 // JSFuction
 if(result != 0){
