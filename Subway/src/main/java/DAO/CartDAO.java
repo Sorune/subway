@@ -6,6 +6,30 @@ import DTO.CartDTO;
 import util.JDBConnect;
 
 public class CartDAO extends JDBConnect {
+	
+			
+	
+	public String gen(String date, String num) { // yyyyMMdd로 포맷한 String이 넘어옴
+		String addNum =""; //date + 숫자
+		
+		String dateTmp = date.substring(4,8);
+		int order_num = Integer.parseInt(date) + 1; // date 정로 변환
+		addNum += dateTmp;
+		String tmp = Integer.toString(order_num);
+
+		int tmplen = tmp.length();
+		if (tmplen == 1) {
+			tmp = "000"+tmp;
+		} else if(tmplen == 2) {
+			tmp = "00"+tmp;
+		} else if(tmplen ==3) {
+			tmp = "0"+tmp;
+		}
+		
+		addNum += tmp;
+		
+		return addNum;
+	}
 
 	public int readCart(CartDTO dto) { // UserDTO dto
 		//카트에 표시될 내용들 메뉴 수량 가격 총액 - 메뉴테이블 가격이 없음 유저정보 필요 x

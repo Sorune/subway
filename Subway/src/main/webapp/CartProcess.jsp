@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DAO.CartDAO"%>
 <%@page import="DTO.CartDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -25,10 +28,18 @@ String user_add = (String)session.getAttribute("user_add");
 String user_phone = (String)session.getAttribute("user_phone");
 
 
+
+// 주문번호 생성
+CartDAO dao = new CartDAO();
+String order_date = request.getParameter("order_date");
+dao.gen(beforeOrder);
+String order_num = 
+
+
 //DTO 객체 생성
 CartDTO dto = new CartDTO();
 
-dto.setOrder_num(order_num);
+//dto.setOrder_num(order_num);
 dto.setMenu_order(Integer.parseInt(menu_order));
 dto.setOrder_kind(order_kind);
 dto.setPay_kind(pay_kind);
@@ -45,7 +56,6 @@ dto.setUser_phone(user_phone);
 
 
 //DAO를 통해 DB에 전달
-CartDAO dao = new CartDAO();
 int result = dao.paymentInfo(dto);
 
 // JSFuction
