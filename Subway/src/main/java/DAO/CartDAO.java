@@ -7,8 +7,26 @@ import util.JDBConnect;
 
 public class CartDAO extends JDBConnect {
 
-	public void readCart() {
+	public int readCart(CartDTO dto) { // UserDTO dto
+		//카트에 표시될 내용들 메뉴 수량 가격 총액 - 메뉴테이블 가격이 없음 유저정보 필요 x
 		// 재작 중 다른분들 DTO,DAO를 이용해 만들 예정
+		int result = 0;
+		String sql = "select * from Cart where user_id=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getUser_id());
+			pstmt.executeQuery();
+			return result;
+			
+			
+		} catch (SQLException e) {
+			System.out.println("readCart() 예외 발생 : 장바구니 목록을 불러오는 중 예외발생");
+			e.printStackTrace();
+		}
+		return result;
+		
+		
 	}
 
 	// 결제정보를 모두 담음
