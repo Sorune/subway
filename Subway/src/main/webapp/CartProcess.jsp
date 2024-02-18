@@ -11,7 +11,7 @@
 
 // 멤버, 메뉴 세션 영역의 값을 불러옴
 String order_num = request.getParameter("order_num");
-String menu_order =request.getParameter("menu_drder"); 	// 나중에 int로 변환
+String user_id =request.getParameter("user_id"); 	// 나중에 int로 변환
 String order_kind = request.getParameter("order_kind");
 String pay_kind = request.getParameter("pay_kind");
 
@@ -22,37 +22,27 @@ String menu_qty = request.getParameter("menu_qty"); 	// 나중에 int로 변환
 String menu_topping = request.getParameter("menu_topping");
 String menu_tatal_price = request.getParameter("menu_total_price"); 	// 나중에 int로 변환
 
-String user_id = (String)session.getAttribute("user_id");
-String user_name = (String)session.getAttribute("user_name");
-String user_add = (String)session.getAttribute("user_add");
-String user_phone = (String)session.getAttribute("user_phone");
+String id = (String)session.getAttribute("user_id");
+String name = (String)session.getAttribute("user_name");
+String add = (String)session.getAttribute("user_add");
+String phone = (String)session.getAttribute("user_phone");
 
 
 
 // 주문번호 생성
 CartDAO dao = new CartDAO();
 String order_date = request.getParameter("order_date");
-dao.gen(beforeOrder);
-String order_num = 
+
+
 
 
 //DTO 객체 생성
 CartDTO dto = new CartDTO();
 
-//dto.setOrder_num(order_num);
-dto.setMenu_order(Integer.parseInt(menu_order));
+dto.setOrder_num(order_num);
 dto.setOrder_kind(order_kind);
 dto.setPay_kind(pay_kind);
-
-dto.setMenu_name(menu_name);
-dto.setMenu_qty(Integer.parseInt(menu_qty));
-dto.setMenu_topping(menu_topping);
-dto.setMenu_total_price(Integer.parseInt(menu_tatal_price));
-
 dto.setUser_id(user_id);
-dto.setUser_name(user_name);
-dto.setUser_add(user_add);
-dto.setUser_phone(user_phone);
 
 
 //DAO를 통해 DB에 전달

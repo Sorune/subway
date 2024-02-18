@@ -56,22 +56,15 @@ public class CartDAO extends JDBConnect {
 	// 결제정보를 모두 담음
 	public int paymentInfo(CartDTO dto) {
 		int result = 0;
-		String sql = "insert into cart values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into cart values(?,?,?,?)";
 
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getOrder_num());
-			pstmt.setInt(2, dto.getMenu_order());
+			pstmt.setString(2, dto.getUser_id());
 			pstmt.setString(3, dto.getOrder_kind());
 			pstmt.setString(4, dto.getPay_kind());
-			pstmt.setString(5, dto.getMenu_name());
-			pstmt.setInt(6, dto.getMenu_qty());
-			pstmt.setString(7, dto.getMenu_topping()); // int인지 String인지 불확실
-			pstmt.setInt(8, dto.getMenu_total_price());
-			pstmt.setString(9, dto.getUser_id());
-			pstmt.setString(10, dto.getUser_name());
-			pstmt.setString(11, dto.getUser_add());
-			pstmt.setString(12, dto.getUser_phone());
+		
 
 			// JSFunction용 정수값 반환
 			result = pstmt.executeUpdate();
@@ -79,7 +72,7 @@ public class CartDAO extends JDBConnect {
 		} catch (SQLException e) {
 			result = 0;
 			e.printStackTrace();
-			System.out.println("");
+			System.out.println("paymentInfo() 예외 발생");
 		}
 		return result;
 
