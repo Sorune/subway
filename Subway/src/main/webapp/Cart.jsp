@@ -23,7 +23,6 @@
 	</table>
 	
 	<!-- 결제 버튼 -->
-	
 	<table border="1" width="90%">
 		<tr align="center" >
 			<td width="100" colspan="8"><button type="submit" name ="payment">결제하기</button>
