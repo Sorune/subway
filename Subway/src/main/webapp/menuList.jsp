@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html><html><head><meta charset="UTF-8"><title>Insert title here</title>
-
 <table border="1" width="90%">
 	<tr>
 		<td>
@@ -17,8 +16,6 @@
 		<td><a href="./Cart.jsp">장바구니</a></td>
 	</tr>
 </table>
-
-
 </head>
 <body>
 </body>

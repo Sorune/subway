@@ -11,5 +11,3 @@ alter table menu_order add constraint order_userid_fk foreign key (user_id) refe
 
 -- 테이블 삭제 (주문)
 drop table menu_order;
-
-select * menu_order;
