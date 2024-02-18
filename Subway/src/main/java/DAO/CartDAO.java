@@ -1,8 +1,8 @@
-package dao;
+package DAO;
 
 import java.sql.SQLException;
 
-import dto.CartDTO;
+import DTO.CartDTO;
 import util.JDBConnect;
 
 public class CartDAO extends JDBConnect {
