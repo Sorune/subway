@@ -11,6 +11,9 @@ order_kind	nvarchar2(30) not null, -- 배달,포장 여부
 pay_kind	nvarchar2(15) not null --결제 방식
 );
 
+insert into cart values ('02180001',13,'bno',8000,)
+
+select * from CART;
 
 alter table cart add constraint cart_menuord_fk foreign key (menu_order) references menu_order(menu_order);
 
