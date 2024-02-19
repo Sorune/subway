@@ -64,8 +64,6 @@ public class CartDAO extends JDBConnect {
 			pstmt.setString(2, dto.getUser_id());
 			pstmt.setString(3, dto.getOrder_kind());
 			pstmt.setString(4, dto.getPay_kind());
-
-
 			// JSFunction용 정수값 반환
 			result = pstmt.executeUpdate();
 
