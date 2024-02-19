@@ -10,14 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 public class loginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//loginDAO ldao = new loginDAO();
+		loginDAO ldao = new loginDAO();
 
 		String id = req.getParameter("admin_id");
 		String pw = req.getParameter("admin_pw");
-		
-	//	ldao.loginDAO(id, pw);
-		
-		
+
 	}
 
 }
