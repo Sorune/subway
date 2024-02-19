@@ -8,7 +8,6 @@
 <title>장바구니</title>
 
 <%
-	String menu_name = session.getMe();
 %>
 
 </head>

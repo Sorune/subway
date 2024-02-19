@@ -14,8 +14,7 @@ public class loginController extends HttpServlet {
 
 		String id = req.getParameter("admin_id");
 		String pw = req.getParameter("admin_pw");
-		
-//		ldao.lloginDAO(id, pw);
+
 	}
 
 }
