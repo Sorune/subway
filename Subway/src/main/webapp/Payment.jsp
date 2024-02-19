@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>결제창</title>
 </head>
 <body>
-	<jsp:include page="./menuList.jsp" />
+
 </body>
 </html>

@@ -2,20 +2,16 @@ package member;
 
 public class memberDTO {
 	
-	
-	
 	private String user_id; 
 	private String user_pass; 
 	private String user_name ;
 	private String user_phone ;
 	private String user_add;
 
-
 	
 	public String getUser_id() {
 		return user_id;
 	}
-	
 	public String getUser_pass() {
 		return user_pass;
 	}
