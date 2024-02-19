@@ -18,11 +18,16 @@ String menu_qty = request.getParameter("menu_qty"); 	// 나중에 int로 변환
 String menu_topping = request.getParameter("menu_topping");
 String menu_tatal_price = request.getParameter("menu_total_price"); 	// 나중에 int로 변환
 
+String order_date = request.getParameter("order_date");
+
 String user_id = (String)session.getAttribute("user_id");
 String user_name = (String)session.getAttribute("user_name");
 String user_add = (String)session.getAttribute("user_add");
 String user_phone = (String)session.getAttribute("user_phone");
 
+//DAO 객체 생성
+CartDAO dao = new CartDAO();
+dao.gen("20240219");
 
 //DTO 객체 생성
 CartDTO DTO = new CartDTO();
@@ -34,7 +39,6 @@ DTO.setPay_kind(pay_kind);
 
 
 //DAO를 통해 DB에 전달
-CartDAO dao = new CartDAO();
 int result = dao.paymentInfo(DTO);
 
 // JSFuction

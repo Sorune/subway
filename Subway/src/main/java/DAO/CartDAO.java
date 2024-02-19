@@ -1,18 +1,27 @@
 package DAO;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 import DTO.CartDTO;
+import DTO.OrderDTO;
 import util.JDBConnect;
 
 public class CartDAO extends JDBConnect {
 	
 			
+	public List<OrderDTO> orderLists(Map<String, Object> map) {
+		List<OrderDTO> ol = new Vector<OrderDTO>(); // 결과 담을 것
+		String sql = "select * from menu_order";
+		return ol;
+	}
 	
-	public String gen(String date, String num) { // yyyyMMdd로 포맷한 String이 넘어옴
+	public String gen(String date) { // yyyyMMdd로 포맷한 String이 넘어옴
 		String addNum =""; //date + 숫자
 		
-		String dateTmp = date.substring(4,8);
+		String dateTmp = date.substring(4,8);	// 20240219
 		int order_num = Integer.parseInt(date) + 1; // date 정로 변환
 		addNum += dateTmp;
 		String tmp = Integer.toString(order_num);
@@ -64,6 +73,8 @@ public class CartDAO extends JDBConnect {
 			pstmt.setString(2, dto.getUser_id());
 			pstmt.setString(3, dto.getOrder_kind());
 			pstmt.setString(4, dto.getPay_kind());
+		
+
 			// JSFunction용 정수값 반환
 			result = pstmt.executeUpdate();
 
