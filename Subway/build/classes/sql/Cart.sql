@@ -2,10 +2,6 @@ alter table cart add constraint cart_userid_fk foreign key(user_id) references m
 
 alter table cart add constraint cart_menu_fk foreign key(menu_order) references menu_order(menu_order);
 
-<<<<<<< HEAD
-=======
---------------------------------- v1
->>>>>>> parent of ab1a8af (Login DB check)
 
 create table cart(
 order_num 	varchar2(15) constraint cart_onum_pk primary key,
@@ -14,10 +10,6 @@ order_kind	nvarchar2(30) not null, -- 배달,포장 여부
 pay_kind	nvarchar2(15) not null --결제 방식
 );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of ab1a8af (Login DB check)
 alter table cart add constraint cart_menuord_fk foreign key (menu_order) references menu_order(menu_order);
 
 drop table cart;
