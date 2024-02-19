@@ -7,8 +7,6 @@ import util.JDBConnect;
 
 public class CartDAO extends JDBConnect {
 	
-			
-	
 	public String gen(String date, String num) { // yyyyMMdd로 포맷한 String이 넘어옴
 		String addNum =""; //date + 숫자
 		
