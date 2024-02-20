@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -14,14 +15,35 @@ public class CartDAO extends JDBConnect {
 			
 	public List<OrderDTO> orderLists(Map<String, Object> map) {
 		List<OrderDTO> ol = new Vector<OrderDTO>(); // 결과 담을 것
+
 		String sql = "select * from menu_order";
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				OrderDTO dto = new OrderDTO();
+				dto.setMenu_name(rs.getString(1));
+				dto.setMenu_qty(rs.getInt(2));
+				dto.setMenu_total_price(rs.getInt(3));
+				dto.setOrder_userid(rs.getString(4));
+				dto.setOrder_date(rs.getDate(5));
+				ol.add(dto);
+			}
+		} catch (SQLException e) {
+			System.out.println("orderLists() 오더정보를 불러오는중 오류발생");
+			e.printStackTrace();
+		}
+		
+		
 		return ol;
 	}
 	
 	public String gen(String date) { // yyyyMMdd로 포맷한 String이 넘어옴
 		String addNum =""; //date + 숫자
 		
-		String dateTmp = date.substring(4,8);	// 20240219
+		String changeNum = new SimpleDateFormat("yyyyMMdd").format(date);
+		String dateTmp = changeNum.substring(4,8);	// 20240219
 		int order_num = Integer.parseInt(date) + 1; // date 정로 변환
 		addNum += dateTmp;
 		String tmp = Integer.toString(order_num);

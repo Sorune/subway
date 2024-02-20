@@ -21,10 +21,10 @@
 %>
 </head>
 <body>
-	<jsp:include page="../Main/MenuListBootStrap.jsp" />
-	<div class="container">
-		<div class="authentication-wrapper authentication-basic container-p-y" align="center" style="width: 75%; height: 150px">
-			<h2>장바구니</h2>
+<jsp:include page="../Main/MenuListBootStrap.jsp" />
+	<div class="container" align="center">
+		<div class="p-5 mb-4 bg-body-tertiary rounded-3" align="center" style="width: 75%; height: 150px">
+			<h3 class="mb-0" align="left">Cart</h3><br/>
 			
 			<!-- 장바구니 목록 테이블 -->
 			<form id="paymenyform" class="card authentication-inner" action="Payment.jsp" method="post">
@@ -54,17 +54,18 @@
 		       		for(OrderDTO dto : cartLists){
 		       		%>
 		       		<tbody class="card-body">
-		       			<td align="center"><%= session.getAttribute("order_date") %></td>
-		       			<td align="center">
+		       			<td ><%= session.getAttribute("order_date") %></td>
+		       			<td >
 		       			<%= session.getAttribute("menu_name") %>
 		       			<% if(session.getAttribute("menu_topping_name") != ""){ %>
 							<p style="font-size:10px"><%= session.getAttribute("menu_topping_name") %></p>
 							<%} %>
 		       			</td>
-						<td align="center"><%= session.getAttribute("menu_qty") %></td>
+						<td><%= session.getAttribute("menu_qty") %></td>
 							
 							<!-- 메뉴삭제버튼 -->
-						<td><button type="button" onclick="location.href=DeleteCart.jsp"></button>
+						<td><button type="button" class="btn btn-sm btn-primary" onclick="location.href=DeleteCart.jsp">삭제</button>
+
 						<%-- <td align="right"><a href=".DeleteCart.jsp?menu_name=<%= session.getAttribute("menu_name") %>">삭제</a> --%>
 					</tbody>
 					<tfoot align="center" >

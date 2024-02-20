@@ -32,7 +32,7 @@ String phone = (String)session.getAttribute("user_phone");
 // 주문번호 생성
 CartDAO dao = new CartDAO();
 String order_date = request.getParameter("order_date");
-
+dao.gen(order_date);
 
 
 

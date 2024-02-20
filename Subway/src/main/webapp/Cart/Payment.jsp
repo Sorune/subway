@@ -26,21 +26,22 @@ String order_kind = "";
 <jsp:include page="../Main/MenuListBootStrap.jsp" />
 
    <!-- 결제창 값 입려  -->
-   <div class="p-5 mb-4 bg-body-tertiary rounded-3" align="center" style="width: 55%; height: 150px">
+<div class="container" align="center">
+   <div class="p-5 mb-4 bg-body-tertiary rounded-3" align="center" style="width: 75%; height: 150px">
    <h3 class="mb-0" align="left">Payment</h3><br/>
-   <form action="PaymentProcess.jsp" method="post" >
-   <table border="1" class="table">
+   <form action="PaymentProcess.jsp" method="post" class="card authentication-inner" >
+   <table class="table card-header">
       <tr>
-         <td width="*"><h5 class="card-header">메뉴</h5></td>
+         <td width="*"><h5 >메뉴</h5></td>
          <td><%=session.getAttribute("menu_name") %> &nbsp; | &nbsp; <%= session.getAttribute("menu_qty") %></td>
       </tr>
       <tr>
-         <td width="35%"><h5 class="card-header">결제하실 금액</h5></td>
-         <td><%= session.getAttribute("menu_total_price") %>원</td>
+         <td width="35%"><h5 >결제하실 금액</h5></td>
+         <td><%= session.getAttribute("menu_total_price") %>&nbsp;원</td>
       </tr>
    
       <tr>
-         <td width="30%"><h5 class="card-header">필수선택사항</h5></td>
+         <td width="30%"><h5>필수선택사항</h5></td>
          <td>
          <label for="배달">배달</label>
          <input type="radio" name="order"  value="배달" class="form-check-input" id="delivery" />
@@ -79,20 +80,15 @@ String order_kind = "";
       </tr>   
       
       <!-- 결제div -->
-      <div class="card-body">
-            <table width="90%">
          <tr align="center" >
-            <td width="100" colspan="8">
+            <td width="100%" colspan="8">
             <button type="submit" class="btn btn-primary" name ="payment">결제하기</button>
-            <button type="reset" class="btn btn-primary" onclick="location.href='Order.jsp'">이전으로</button></td>
+            <button type="reset" class="btn btn-primary" onclick="history.back()">이전으로</button></td>
          </tr>
-      </table>
-      </div>
-      
-   </div>      
-   </form>
-   </table>
-
+</table>
+</form>
+</div>
+</div>
 <script type="text/javascript">
    
 showinput();
@@ -124,13 +120,6 @@ function showinput(form) {
            
     });
 }
-
-function isNullData(form) {
-   
-}
-   
-
-
 </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
