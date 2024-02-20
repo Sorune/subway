@@ -61,10 +61,10 @@
 							<p style="font-size:10px"><%= session.getAttribute("menu_topping_name") %></p>
 							<%} %>
 		       			</td>
-						<td align="center"><%= session.getAttribute("menu_qty") %></td>
+						<td><%= session.getAttribute("menu_qty") %></td>
 							
 							<!-- 메뉴삭제버튼 -->
-						<td><button type="button" onclick="location.href=DeleteCart.jsp"></button>
+						<td><button type="button" class="btn btn-sm btn-primary" onclick="location.href=DeleteCart.jsp">삭제</button>
 						<%-- <td align="right"><a href=".DeleteCart.jsp?menu_name=<%= session.getAttribute("menu_name") %>">삭제</a> --%>
 					</tbody>
 					<tfoot align="center" >
