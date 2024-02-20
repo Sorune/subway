@@ -5,8 +5,9 @@
   String menu_name = request.getParameter("menu_name");
 if(menu_name != null){
 	session.invalidate();
-	response.sendRedirect("Cart.jsp");
 }
+
+response.sendRedirect("Cart.jsp");
 
 %>
     
