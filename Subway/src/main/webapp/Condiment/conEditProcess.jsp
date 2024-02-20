@@ -3,33 +3,38 @@
 <%@page import="DTO.CondimentDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%	//폼값 받기
+    
+    
+<%
+// 수정 내용 얻기
+String menuId = request.getParameter("menu_id");
 String conName = request.getParameter("name");
 String conPrice = request.getParameter("price");
 String conCount = request.getParameter("count");
 String conKind = request.getParameter("kind");
 
-//폼값을 DTO 객체에 저장
+// DTO에 저장
 CondimentDTO dto = new CondimentDTO();
+dto.setMenuId(Integer.parseInt(menuId) );
 dto.setConName(conName);
-dto.setConPrice(Integer.parseInt(conPrice));
-dto.setConCount(Integer.parseInt(conCount));
+dto.setConPrice(Integer.parseInt(conPrice) );
+dto.setConCount(Integer.parseInt(conCount) );
 dto.setConKind(conKind);
-//menu_id 필요하면 추가
-//DAO 객체를 통해 DB에 DTO 저장
+
+// DB에 반영
 CondimentDAO dao = new CondimentDAO(application);
-int iResult = dao.insertWrite(dto);
+int affected = dao.updateEdit(dto);
 dao.close();
 
-// 성공 유무 확인
-if(iResult == 1){	// 글쓰기가 성공하면 1값이 반환됨
-	response.sendRedirect("conList.jsp");//게시판 목록을 돌아감
+if(affected ==1 ){
+	// 성공 시 상세 보기 페이지로 이동
+	response.sendRedirect("conView.jsp?menu_id=" + dto.getMenuId());
 }else{
-	JSFunction.alertBack("메뉴추가가 실패되었습니다.", out);
+	// 실패시 이전 페이지로 이동
+	JSFunction.alertBack("수정하기에 실패하였습니다.", out);
 }
 
 %>
-    
     
 <!DOCTYPE html>
 <html>

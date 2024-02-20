@@ -30,7 +30,7 @@ function validateForm(form){	// 폼 내용 검증
 </script>
 <jsp:include page="./conHeadLink.jsp"/>
 <h2>새메뉴 추가</h2>
-<form name="InsertForm" method="post" action="conWriteProcess.jsp"
+<form name="insertForm" method="post" action="conWriteProcess.jsp"
 		onsubmit="return validateForm(this);">
 	<table border="1" width="90%">
 		<tr>

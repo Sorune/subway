@@ -20,7 +20,7 @@ if(searchWord != null){
 }
 
 int totalCount = dao.selectCount(param);	// 게시물 수 확인
-List<CondimentDTO> condimentLists = dao.selectList(param);
+List<CondimentDTO> condimentLists = dao.selectList(param);	// 게시물 목록 받기
 dao.close();
 %>
     
@@ -36,8 +36,8 @@ dao.close();
 	<tr>
 		<td align="center">
 			<select name="searchField">
-				<option value="title">번호</option>
-				<option value="content">이름</option>
+				<option value="menu_id">번호</option>
+				<option value="name">이름</option>
 			</select>
 			<input type="text" name="searchWord"/>
 			<input type="submit" value="검색하기"/>
@@ -51,9 +51,11 @@ dao.close();
 			<tr>
 				<th width="10%">번호</th>
 				<th width="35%">이름</th>
-				<th width="35%">가격</th>
+				<th width="15%">가격</th>
 				<th width="10%">재고량</th>
 				<th width="10%">종류</th>
+				<th width="10%">수정</th>
+				<th width="10%">삭제</th>
 			</tr>
 			<!--  목록의 내용 -->
 <%
@@ -82,8 +84,13 @@ else{
 			<td align="center"><%= dto.getConPrice() %></td>
 			<td align="center"><%= dto.getConCount() %></td>
 			<td align="center"><%= dto.getConKind() %></td>
+			<td align="center">
+				<button type = "button" onClick="location.href='conEdit.jsp?menu_id=<%= dto.getMenuId() %>'">수정하기</button>
+			</td>
+			<td align="center">
+				<button type = "button" onclick="location.href='conDeleteProcess.jsp?menu_id=<%= dto.getMenuId() %>'">삭제하기</button>
+			</td>
 		</tr>
-
 <% 	
 	}
 }
@@ -98,7 +105,6 @@ else{
 				</button></td>
 			</tr>
 		</table>
-	</tr>
 
 </body>
 </html>
