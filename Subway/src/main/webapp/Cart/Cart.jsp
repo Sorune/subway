@@ -65,6 +65,7 @@
 							
 							<!-- 메뉴삭제버튼 -->
 						<td><button type="button" class="btn btn-sm btn-primary" onclick="location.href=DeleteCart.jsp">삭제</button>
+
 						<%-- <td align="right"><a href=".DeleteCart.jsp?menu_name=<%= session.getAttribute("menu_name") %>">삭제</a> --%>
 					</tbody>
 					<tfoot align="center" >

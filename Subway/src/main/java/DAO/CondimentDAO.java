@@ -233,6 +233,51 @@ public class CondimentDAO extends JDBConnect{
 			}	
 			return bbs;	//쿼리 결과를 list 컬렉션을 jsp 반환
 	}
+	public List<CondimentDTO> selectListPage(Map<String, Object> map){
+		//selectListPage, selectList 별도존재
+		List<CondimentDTO> bbs = new Vector<CondimentDTO>();
+		
+		// 쿼리문 템플릿
+		String query = "SELECT * FROM ( SELECT Tb.*, ROWNUM rNum FROM ( SELECT * FROM condiment ";
+		
+		// 검색 조건 추가
+		if(map.get("searchWord") != null) {
+			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
+		}
+		
+		query += "		ORDER BY condiment DESC ) Tb ) WHERE rNum BETWEEN ? AND ?";
+	
+		try {
+			// 쿼리문 완성
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, map.get("start").toString());
+			pstmt.setString(2,  map.get("end").toString());
+			// 쿼리문 실행
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				// 한 행(게시물 하나)의 데이터를 DTO에 저장
+				CondimentDTO dto = new CondimentDTO();
+				dto.setMenuId(rs.getInt("menu_id"));
+				dto.setConName(rs.getString("con_name"));
+				dto.setConPrice(rs.getInt("con_price"));
+				dto.setConCount(rs.getInt("con_count"));
+				dto.setConKind(rs.getString("con_kind"));
+				
+				// 반환할 결과 목록에 게시물 추가
+				bbs.add(dto);
+			}
+			
+		}catch(Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		// 목록 반환
+		return bbs;
+	}
+	
+	
+	
 	// 게시글 데이터를 받아 DB에 추가
 	public int insertWrite(CondimentDTO dto) {
 		//게시판
@@ -259,15 +304,71 @@ public class CondimentDAO extends JDBConnect{
 		return result;
 	}
 	//지정한 게시물을 찾아 내용을 반환하는 메서드
-	public CondimentDTO selectView(String num) {
+	
+	public CondimentDTO selectView(int menuId) {
 		CondimentDTO dto = new CondimentDTO();
-		/*
+
 		//쿼리 생성
-		String query = "SELECT B.*, M.menu_id "
-				+ " FROM con_name M INNER JOIN condiment B "
-				+ " ON M."*/
-		return dto;
+		String query = "select * from condiment where menu_id = ? ";
 		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, menuId);
+			rs = pstmt.executeQuery();//쿼리문 실행에 rs저장
+			
+			//결과처리
+			if(rs.next()) {// ResultSet 객체로 변환된 행을 next()확인
+				dto.setMenuId(rs.getInt(1));
+				dto.setConName(rs.getString("con_name"));
+				dto.setConPrice(rs.getInt("con_price"));
+				dto.setConCount(rs.getInt("con_count"));
+				dto.setConKind(rs.getString("con_kind"));
+				
+			}
+			
+		} catch(Exception e) {
+			System.out.println("게시물 상세보기 예외발생");
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
+	public int updateEdit(CondimentDTO dto) {//게시물 수정용
+		int result = 0;
+		
+		try {//쿼리문 작성
+			String sql = "UPDATE condiment SET con_name = ? , con_price= ? , con_count = ? , con_kind = ? WHERE menu_id =? ";//menuId는 수정안함
+			pstmt = con.prepareStatement(sql); // 동적쿼리문 생성
+			pstmt.setString(1, dto.getConName());
+			pstmt.setInt(2, dto.getConPrice());
+			pstmt.setInt(3, dto.getConCount());
+			pstmt.setString(4, dto.getConKind());
+			pstmt.setInt(5, dto.getMenuId());
+			//쿼리문 실행
+			result = pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			System.out.println("게시물 수정중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int deletePost(CondimentDTO dto) {
+		int result =0;
+		try {
+			// 쿼리문 템플릿
+			String query = "DELETE FROM condiment WHERE menu_id =? ";
+			
+			// 쿼리문 완성
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1,  dto.getMenuId());
+			
+			// 쿼리문 실행
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("게시물 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
