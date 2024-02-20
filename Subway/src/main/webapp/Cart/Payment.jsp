@@ -1,3 +1,6 @@
+<%@page import="java.util.Vector"%>
+<%@page import="DTO.OrderDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -13,6 +16,8 @@ String user_add ="";
 String user_phone ="";
 String pay_kind = "";
 String order_kind = "";
+List<OrderDTO> cartLists = (Vector<OrderDTO>)session.getAttribute("cartLists");
+System.out.println(cartLists);
 %>
 
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -33,11 +38,11 @@ String order_kind = "";
    <table class="table card-header">
       <tr>
          <td width="*"><h5 >메뉴</h5></td>
-         <td><%=session.getAttribute("menu_name") %> &nbsp; | &nbsp; <%= session.getAttribute("menu_qty") %></td>
+         <td><%= cartLists.get(0).getMenu_name() %> &nbsp; | &nbsp; <%= cartLists.get(0).getMenu_qty() %></td>
       </tr>
       <tr>
          <td width="35%"><h5 >결제하실 금액</h5></td>
-         <td><%= session.getAttribute("menu_total_price") %>&nbsp;원</td>
+         <td><%= cartLists.get(0).getMenu_total_price() %>&nbsp;원</td>
       </tr>
    
       <tr>

@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,14 @@ public class CartDAO extends JDBConnect {
 	public String gen(String date) { // yyyyMMdd로 포맷한 String이 넘어옴
 		String addNum =""; //date + 숫자
 		
-		String changeNum = new SimpleDateFormat("yyyyMMdd").format(date);
+		java.util.Date tmpDate = new java.util.Date();
+		try {
+			tmpDate = new SimpleDateFormat("yyyyMMdd").parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String changeNum = new SimpleDateFormat("yyyyMMdd").format(tmpDate);
 		String dateTmp = changeNum.substring(4,8);	// 20240219
 		int order_num = Integer.parseInt(date) + 1; // date 정로 변환
 		addNum += dateTmp;
