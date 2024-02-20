@@ -21,7 +21,7 @@
 %>
 </head>
 <body>
-	<jsp:include page="./MenuListBootStrap.jsp" />
+	<jsp:include page="../Main/MenuListBootStrap.jsp" />
 	<div class="container">
 		<div class="authentication-wrapper authentication-basic container-p-y" align="center" style="width: 75%; height: 150px">
 			<h2>장바구니</h2>

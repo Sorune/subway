@@ -29,7 +29,7 @@ dao.close();
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="./conHeadLink.jsp"/> <!-- 공통 링크 -->
+	<jsp:include page="../Main/MenuListBootStrap.jsp"/> <!-- 공통 링크 -->
 	<h2>제품 목록 보기(conList)</h2>
 	<form method="get">
 	<table border="1" width="90%">
@@ -101,7 +101,7 @@ else{
 		<!--  목록 하단의 [글쓰기] 버튼 -->
 		<table border="1" width="90%">
 			<tr align="right">
-				<td><button type="button" onclick="location.href='conWrite.jsp'";>글쓰기
+				<td><button type="button" onclick="location.href='conWrite.jsp';">제품 추가
 				</button></td>
 			</tr>
 		</table>

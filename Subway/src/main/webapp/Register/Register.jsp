@@ -11,7 +11,7 @@
 <title>회원가입</title>
 </head>
 <body>
-   <jsp:include page="./menuList.jsp" />
+   <jsp:include page="../Main/MenuListBootStrap.jsp" />
 <h4> 회원 가입 </h4>
 <%
 JDBConnect jdbc = new JDBConnect();
@@ -19,7 +19,7 @@ JDBConnect jdbc = new JDBConnect();
 %>
 
    <tr align="center">
-      <form action="./AddUser.jsp" method="post">
+      <form action="../Register/AddUser.jsp" method="post">
       아이디 : <input type="text" name="id" id="frm_id" value="" /> <input type="button" id="check_button" value="ID 중복검사" onclick="checkid();"></button><br />
       비밀번호 : <input type="password" name="pass" value="" /><br />
       이름 : <input type="text" name="name" value="" /><br />

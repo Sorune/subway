@@ -25,7 +25,7 @@ dao.close(); // DB 연결 닫기
 <title>주문하기</title>
 </head>
 <body>
-	<jsp:include page="./menuList.jsp" />
+	<jsp:include page="../Main/MenuListBootStrap.jsp" />
 	<table>
 		<tr>
 			<td>상품아이디</td>

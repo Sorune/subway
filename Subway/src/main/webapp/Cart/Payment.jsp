@@ -23,7 +23,7 @@ String order_kind = "";
 </head>
 <body>
 
-<jsp:include page="./MenuListBootStrap.jsp" />
+<jsp:include page="../Main/MenuListBootStrap.jsp" />
 
    <!-- 결제창 값 입려  -->
    <div class="p-5 mb-4 bg-body-tertiary rounded-3" align="center" style="width: 55%; height: 150px">
