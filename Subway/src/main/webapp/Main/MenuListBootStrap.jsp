@@ -23,14 +23,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="../Main/main.jsp">Home</a></li>
+                        <% if(session.getAttribute("admin_id")!= null || session.getAttribute("user_id")!=null){ %>
+                        <li class="nav-item"><a class="nav-link" href="../Login/Logout.jsp">Logout</a></li>
+                        <% } else { %>
                         <li class="nav-item"><a class="nav-link" href="../Login/LoginForm.jsp">Login</a></li>
+                        <% } %>
                         <li class="nav-item"><a class="nav-link" href="../Order/Order.jsp">Order</a></li>
+                        <% if(session.getAttribute("admin_id")!= null){ %>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="# role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Condiments</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="../Condiment/conList.jsp">Condiments</a></li>
                             </ul>
                         </li>
+                        <%} %>
                     </ul>
                     <form class="d-flex">
                         <a class="btn btn-outline-dark" role="button" href="../Cart/Cart.jsp">

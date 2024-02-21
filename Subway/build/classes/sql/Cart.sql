@@ -43,4 +43,6 @@ select * from MEMBER, MENU_ORDER where member.user_id = menu_order.user_id;
 
 select * from CART, (select * from MENU_ORDER where member.user_id = menu_order.user_id) where user_id = ?; 
 
+select * from menu_order where rownum=1;
 
+select *, rownum from menu_order;

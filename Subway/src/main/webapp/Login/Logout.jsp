@@ -7,5 +7,5 @@ session.removeAttribute("user_id");
 
 session.invalidate();
 
-response.sendRedirect("LoginForm.jsp");
+response.sendRedirect("../Main/main.jsp");
 %>

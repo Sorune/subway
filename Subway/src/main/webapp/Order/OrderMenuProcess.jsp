@@ -12,7 +12,7 @@
 	//DTO 객체 생성(OrderDTO)
 	OrderDTO dto = new OrderDTO();
 	// DAO 객체 생성(CondimentDAO)
-	CondimentDAO cdao = new CondimentDAO(application);
+	CondimentDAO cdao = new CondimentDAO();
 	// DAO 객체 생성(OrderDAO)
 	OrderDAO dao = new OrderDAO();	
 	
@@ -34,12 +34,17 @@
 	dao.afterInv(searchResult);
 	
 	// ------------------------ 주문처리 프로세스 ------------------------
+	
+	
+	
 	// 리퀘스트 영역의 값 가져오기 (Order.jsp의 form의 input값 가져오기)
 	String menu_name = request.getParameter("menu_name");
 	int menu_qty = Integer.parseInt(request.getParameter("menu_qty"));
 	int menu_total_price = Integer.parseInt(request.getParameter("menu_total_price"));
 	String order_userid = request.getParameter("order_userid");
 
+	session.setAttribute("menu_name", menu_name);
+	
 	dto.setMenu_name(menu_name);
 	dto.setMenu_qty(menu_qty);
 	dto.setMenu_total_price(menu_total_price);

@@ -20,16 +20,3 @@ JSFunction.alertLocation(menuId + "번 삭제되었습니다. 기능필요시 14
 
 
 %>
-    
-    
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

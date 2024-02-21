@@ -7,8 +7,6 @@
     pageEncoding="UTF-8"%>
 <%
 
-//서준씨가 장바구니 추가 버튼을 누르면 이동하여 값을 받음
-
 // 멤버, 메뉴 세션 영역의 값을 불러옴
 String order_num = request.getParameter("order_num");
 String user_id =request.getParameter("user_id"); 	// 나중에 int로 변환
@@ -33,7 +31,7 @@ String phone = (String)session.getAttribute("user_phone");
 CartDAO dao = new CartDAO();
 String order_date = request.getParameter("order_date");
 dao.gen(order_date);
-
+System.out.println(order_date);
 
 
 //DTO 객체 생성

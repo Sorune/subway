@@ -245,7 +245,7 @@ public class CondimentDAO extends JDBConnect{
 			query += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
 		}
 		
-		query += "		ORDER BY condiment DESC ) Tb ) WHERE rNum BETWEEN ? AND ?";
+		query += "		ORDER BY menu_id DESC ) Tb ) WHERE rNum BETWEEN ? AND ?";
 	
 		try {
 			// 쿼리문 완성

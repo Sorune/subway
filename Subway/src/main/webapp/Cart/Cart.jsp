@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="DTO.OrderDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
@@ -18,6 +19,7 @@
 	CartDAO dao = new CartDAO();
 	List<OrderDTO> cartLists = dao.orderLists(ol); // 주문 목록 리스트
 	session.setAttribute("cartLists", cartLists);
+	
 
 %>
 </head>
@@ -32,10 +34,11 @@
 			
 			<table class="table card-header" border="1" width="90%">
 				<thead>
-					<th class="col-2 text-nowrap">주문시각</th>
-					<th class="col-5 text-nowrap">메뉴명</th>
+				<th class="col-2 text-nowrap">주문시각</th>
+					<th class="col-3 text-nowrap">메뉴명</th>
+					<th class="col-3 text-nowrap">가격</th>
 					<th class="col-2 text-nowrap">수량</th>
-					<th class="col-3 text-nowrap">비고</th>
+					<th class="col-2 text-nowrap">비고</th>
 				</thead>
 		       		<%-- <img src="./resources/images/" onclick="location.href = '메뉴소개'" style="width: 150; height:150" />	
 		       		<a  href=./menu.jsp?/menu_name=<%= request.getAttribute("menu_name") %></a> --%>
@@ -53,26 +56,24 @@
 		       		<%}else{ // 장바구니에 항목이 있을 경우
 		       			int tmpNo = 0;
 		       		for(OrderDTO dto : cartLists){
+		       			int tmp = 0;
 		       		%>
 		       		<tbody class="card-body">
-		       			<td ><%= dto.getOrder_date() %></td>
+		       			
+		       			<td ><%= dto.getOrder_date()%></td>
 		       			<td >
 		       			<%= dto.getMenu_name() %>
 		       			<% if(session.getAttribute("menu_topping_name") != null && session.getAttribute("menu_topping_name") != ""){ %>
 							<p style="font-size:10px"><%= session.getAttribute("menu_topping_name") %></p>
 							<%} %>
 		       			</td>
+		       			<td><%= dto.getMenu_total_price()%>원</td>
 						<td><%= dto.getMenu_qty() %></td>
-							
+							<% session.setAttribute("dto"+tmp, dto); %>
 							<!-- 메뉴삭제버튼 -->
-						<td><button type="button" class="btn btn-sm btn-primary" onclick="location.href='DeleteCart.jsp'">삭제</button>
-
+						<td><button type="button" class="btn btn-sm btn-primary" onclick="location.href='DeleteCart.jsp?order=<%= "dto"+tmp%>'">삭제</button>
 						<%-- <td align="right"><a href=".DeleteCart.jsp?menu_name=<%= session.getAttribute("menu_name") %>">삭제</a> --%>
 					</tbody>
-					<tfoot align="center" >
-						<td colspan="4" >결제금액 : <%= dto.getMenu_total_price()%>원</td>
-						
-					</tfoot>
 					<%
 						}
 		       		}
@@ -83,6 +84,7 @@
 				<div class="card-footer" align="center" >
 					<td width="100" colspan="8"><button class="btn btn-primary" type="submit" name ="payment">주문하기</button>
 					<button class="btn btn-primary" type="reset" onclick="history.back()">이전으로</button></td>
+					<button type="button" style="align-content: left" class="btn btn-primary" onclick="location.href='DeleteCartProcess.jsp'">장바구니 비우기</button>
 				</div>
 			</form>
 		</div>

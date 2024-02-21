@@ -128,7 +128,7 @@ public class OrderDAO extends JDBConnect {
 		}
 	}
 
-	// 탭메뉴를 눌렀을 시 해당 탭의 갯수흫 가져오는 메서드
+	// 탭메뉴를 눌렀을 시 탭의 갯수만큼 테이블 카테고리를 가져오는 메서드
 	public int findCount(String kind) {
 		int totalcount = 0;
 		String query = "select count(*) from condiment where con_kind = ?";
@@ -142,7 +142,7 @@ public class OrderDAO extends JDBConnect {
 
 			System.out.println("게시물 카테고리별 가져오기 성공!");
 		} catch (Exception e) {
-			System.out.println("findByCategory() 메서드를 실행하는중 예외발생!");
+			System.out.println("findCount() 메서드를 실행하는중 예외발생!");
 			e.printStackTrace();
 		}
 		System.out.println(totalcount);
@@ -177,7 +177,57 @@ public class OrderDAO extends JDBConnect {
 			e.printStackTrace();
 		}
 		return tabSerchValue;
-		
+	}
+	
+	// 메뉴별 아이템을 불러와 숫자를 메뉴아이템(정수)을 가져오는 메서드 (아이템의 메뉴번호를 받아서 숫자로 처리...)
+	public int findMenuItemNumber(String kind) {
+		int itemCount = 0;
+		String query = "select count(*) from condiment where con_kind = ?";
+
+		try {
+			pstmt = con.prepareStatement(query); 	// 쿼리문 생성
+			pstmt.setString(1, kind);
+			rs = pstmt.executeQuery();	// 쿼리 실행
+			rs.next();
+			itemCount = rs.getInt(1);		// 1번째 값 가져옴
+
+			System.out.println("아이템들의 번호를 가져오기 성공!");
+		} catch (Exception e) {
+			System.out.println("findMenuItemNumber() 메서드를 실행하는중 예외발생!");
+			e.printStackTrace();
+		}
+		System.out.println(itemCount); // 구분(문자열)이 같은 메뉴의 숫자를 출력확인
+		return itemCount;
+	}
+	
+	// 메뉴 버튼 숫자 = 메뉴별 아이템 숫자 
+	public List<CondimentDTO> itemNumInsert(String kind) {
+		List<CondimentDTO> btnMenuItem = new Vector<CondimentDTO>(); // 결과(게시물 목록)를 담을 변수
+
+		String query = "select * from condiment where con_kind = ? order by menu_id desc"; // sql condiment테이블 조회
+
+		try {
+			pstmt = con.prepareStatement(query); // 쿼리문 생성
+			pstmt.setString(1, kind);
+			rs = pstmt.executeQuery(); // 쿼리 실행
+
+			while (rs.next()) { // 결과를 순화하며...
+				// 한 행(게시물 하나)의 내용을 DTO에 저장
+				CondimentDTO dto = new CondimentDTO();
+
+				dto.setConCount(rs.getInt("CON_COUNT"));
+				dto.setConKind(rs.getString("con_kind"));
+				dto.setConPrice(rs.getInt("con_price"));
+				dto.setConName(rs.getString("con_name"));
+				dto.setMenuId(rs.getInt("menu_id"));
+
+				btnMenuItem.add(dto); // 결과 목록에 저장
+			}
+		} catch (Exception e) {
+			System.out.println("탭 선택 게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		return btnMenuItem;
 	}
 	
 }

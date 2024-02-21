@@ -4,9 +4,7 @@
 	<table border="1" width="90%">
 	<tr>
 		<td align="center">
-		<a href="./conWrite.jsp">제품추가</a>&nbsp;&nbsp;&nbsp;
-		<a href="./conEdit.jsp">제품수정</a>&nbsp;&nbsp;&nbsp;
-		<a href="">제품삭제</a>
+		<a href="./conWrite.jsp">Condiment는 headLink필요없음</a>&nbsp;;
 		</td>
 	</tr>
 	</table>

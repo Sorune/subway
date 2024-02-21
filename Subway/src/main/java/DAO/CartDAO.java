@@ -13,6 +13,51 @@ import util.JDBConnect;
 
 public class CartDAO extends JDBConnect {
 	
+	/*
+	 * // 특정 게시물만 삭제하기 public OrderDTO selectCart(String date) { OrderDTO dto = new
+	 * OrderDTO();
+	 * 
+	 * SimpleDateFormat order_date = new SimpleDateFormat(date); try { String sql =
+	 * "select count(*) from menu_order";
+	 * 
+	 * pstmt = con.prepareStatement(sql);
+	 * } catch (SQLException e) { e.printStackTrace(); } return dto;
+	 * }
+	 */
+		public void removeCart(OrderDTO dto) {
+			
+			try {
+				String sql = "delete from menu_order";
+				pstmt= con.prepareStatement(sql);
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("removeCart() 예외 발생");
+				e.printStackTrace();
+			}
+			
+		}
+	
+	public List<CartDTO> orderLists() {
+		List<CartDTO> ol = new Vector<CartDTO>(); // 결과 담을 것
+
+		String sql = "select * from cart";
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				CartDTO dto = new CartDTO();
+				dto.setOrder_num(rs.getString("order_num"));
+				ol.add(dto);
+			}
+		} catch (SQLException e) {
+			System.out.println("orderLists() 오더정보를 불러오는중 오류발생");
+			e.printStackTrace();
+		}
+		
+		
+		return ol;
+	}
 			
 	public List<OrderDTO> orderLists(Map<String, Object> map) {
 		List<OrderDTO> ol = new Vector<OrderDTO>(); // 결과 담을 것
@@ -43,18 +88,21 @@ public class CartDAO extends JDBConnect {
 	public String gen(String date) { // yyyyMMdd로 포맷한 String이 넘어옴
 		String addNum =""; //date + 숫자
 		
-		java.util.Date tmpDate = new java.util.Date();
-		try {
-			tmpDate = new SimpleDateFormat("yyyyMMdd").parse(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+		int num = 0;
+		List<CartDTO> lists = orderLists();
+		for (CartDTO dto : lists) {
+			String tmp = dto.getOrder_num();
+			System.out.println(tmp);
+			tmp = tmp.substring(4,8);
+			System.out.println(tmp);
+			int oNum = Integer.parseInt(tmp);
+			if (num <= oNum) num = oNum;
 		}
-		String changeNum = new SimpleDateFormat("yyyyMMdd").format(tmpDate);
-		String dateTmp = changeNum.substring(4,8);	// 20240219
-		int order_num = Integer.parseInt(date) + 1; // date 정로 변환
+		num++;
+		String dateTmp = date.substring(4,8);	// 20240219
 		addNum += dateTmp;
-		String tmp = Integer.toString(order_num);
+		String tmp = Integer.toString(num);
 
 		int tmplen = tmp.length();
 		if (tmplen == 1) {

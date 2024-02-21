@@ -15,6 +15,31 @@ public class UserDAO extends JDBConnect {
 		super(application);
 	}
 
+   public UserDTO Userselect(String user_id) {
+	      UserDTO dto = new UserDTO();
+	      
+	      try {
+	         String query = "SELECT * FROM member WHERE user_id=?";
+	         
+	         pstmt = con.prepareStatement(query);
+	         pstmt.setString(1, user_id);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         if (rs.next()) {
+	            
+	            dto.setUser_Id(rs.getString("user_id"));
+	            dto.setUser_Pass(rs.getString("user_pass"));
+	            dto.setUser_Phone(rs.getString("user_phone"));
+	            dto.setUser_Add(rs.getString("user_add"));
+	         }
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      return dto;
+	   }
+	   
 	@SuppressWarnings("null")
 	public void createUser(UserDTO dto) {
 		
