@@ -1,5 +1,12 @@
+<%@page import="java.util.Vector"%>
+<%@page import="DTO.OrderDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+List<OrderDTO> cartLists = (Vector<OrderDTO>)session.getAttribute("cartLists");
+int count = 0;
+if (cartLists != null) count = cartLists.size();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +49,7 @@
                         <a class="btn btn-outline-dark" role="button" href="../Cart/Cart.jsp">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill"><%= 0 %></span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill"><%= count  %></span>
                         </a>
                     </form>
                 </div>

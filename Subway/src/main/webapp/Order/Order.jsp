@@ -17,20 +17,41 @@ Map<String, Object> param = new HashMap<String, Object>(); // 파라미터 생�
 int totalCount = dao.selectCount(param); // 게시물 수 확인(위에서 만든 파라미터 값을 매개값으로 전달)
 List<CondimentDTO> condimentLists = dao.selectList(param); // 게시물 목록 받기
 
+
 dao.close(); // DB 연결 닫기
 
 //게시물보기 - 탭메뉴 눌렀을시 보여줌
 OrderDAO dao2 = new OrderDAO();
 
 // System.out.println(request.getParameter("kind"));
-int totalCount2 = dao2.findCount(request.getParameter("kind")); // 게시물 수 확인(위에서 만든 파라미터 값을 매개값으로 전달)
-List<CondimentDTO> condimentLists2 = dao2.selectFindCountCount(request.getParameter("kind")); // 게시물 목록 받기
+String kind = request.getParameter("kind");
+List<CondimentDTO> condimentLists2;
+int totalCount2 = 0;
+if (kind == null) {
+	totalCount2 = dao2.findCount("빵"); // 게시물 수 확인(위에서 만든 파라미터 값을 매개값으로 전달)
+	condimentLists2 = dao2.selectFindCountCount("빵"); // 게시물 목록 받기
+} else {
+	totalCount2 = dao2.findCount(request.getParameter("kind")); // 게시물 수 확인(위에서 만든 파라미터 값을 매개값으로 전달)
+	condimentLists2 = dao2.selectFindCountCount(request.getParameter("kind")); // 게시물 목록 받기
+}
+
 
 dao2.close(); // DB 연결 닫기
 
 int totalItemCount = dao.findCount(request.getParameter("name_id")); // 아이템 수량 확인(카테고리별 로드된 데이터의 값을 보여질 아이템의 넘버로 바꿔준다.)
 List<CondimentDTO> condimentLists3 = dao.selectFindCountCount(request.getParameter("kind")); 
 
+
+/* 
+List<CondimentDTO> selectLists = new Vector<CondimentDTO>(); 
+selectLists = (List<CondimentDTO>)session.getAttribute("selectLists");
+if(request.getAttribute("menu_id") != null)selectLists.add(dao.selectCon(request.getAttribute("menu_id").toString()));
+System.out.println(request.getAttribute("menu_id"));
+for( CondimentDTO dto : selectLists){
+	System.out.println(dto.getMenuId());
+}
+session.setAttribute("selectLists", selectLists);
+*/
 // 추가하기 버튼을 누르면 상세주문 페이지에 값이 들어가는 메서드
 
 %>
@@ -126,12 +147,6 @@ List<CondimentDTO> condimentLists3 = dao.selectFindCountCount(request.getParamet
 				%>
 				
 				
-				
-				
-				
-				
-				
-				
 				<input type="text" name="menu_name" value=""
 					placeholder="메뉴 입력"></li>
 				<li>단가 :</li>
@@ -175,7 +190,7 @@ List<CondimentDTO> condimentLists3 = dao.selectFindCountCount(request.getParamet
 				</table>
 			</div>
 			<div class="menu_main1_sub">
-				<form action="get">
+				
 					<table class="table h-50 overflow-scroll">
 						<!-- 목록의 내용 -->
 						<%
@@ -190,27 +205,31 @@ List<CondimentDTO> condimentLists3 = dao.selectFindCountCount(request.getParamet
 						} else {
 						// 게시물이 있을 때 
 						int virtualNum = 0; // 화면상에서의 게시물 번호
+						int count = 1;
 						for (CondimentDTO condto : condimentLists2) {
 							virtualNum = totalCount--; // 전체 게시물 수에서 시작해 1씩 감소
 						%>
 						<tr align="center">
 							<!--상품 아이디-->
-							<td class="col-2 text-nowrap text-center"><%=condto.getMenuId()%></td>
+							<td class="col-2 text-nowrap text-center"><%=count%></td>
 							<!--상품 이름-->
 							<td class="col-4 text-nowrap text-center"><%=condto.getConName()%></td>
 							<!--상품 가격-->
 							<td class="col-3 text-nowrap text-center"><%=condto.getConPrice()%></td>
 							<!-- 추가하기 버튼 -->
-							<td class="col-3 text-nowrap text-center"><button
-									class="btn btn-sm btn-primary" id="selectBtn"
-									 type="submit" name="menu_id" value="1">추가하기</button></td>
+							<td class="col-3 text-nowrap text-center">
+							<form method="get">
+								<button	class="btn btn-sm btn-primary" id="selectBtn" type="submit" name="menu_id" value=<%= condto.getMenuId() %>>추가하기</button>
+								
+							</form>
+							</td>
 						</tr>
 						<%
-						}
+							count ++;
+							}
 						}
 						%>
 					</table>
-				</form>
 
 			</div>
 
@@ -308,28 +327,29 @@ List<CondimentDTO> condimentLists3 = dao.selectFindCountCount(request.getParamet
 				%>
 			</table>
 		</div>
-		<div class="menu_sub">
+		<!-- 메뉴 추가 예시 -->
+		<!-- <div class="menu_sub">
 			<table class="table">
 				<tr class="lastOrderTable">
 					<td><img alt="" src="메뉴사진"
 						style="width: 100px; height: 100px;"></td>
 					<td><span>빵</span></td>
-					<!-- 설명 -->
+					설명
 					<td><input type="number" id="menu_sub_price" value="3000"
 						disabled="disabled"></td>
-					<!-- 단가 -->
+					단가
 					<td><input id="menu_sub_qty" type="number" value="1" min="1"
 						max="10" onblur="addMoney()"></td>
-					<!-- 수량 -->
+					수량
 					<td><span id="menu_sub_result"></span></td>
-					<!-- 단가 * 수량 -->
+					단가 * 수량
 					<td></td>
 				</tr>
 			</table>
-		</div>
+		</div> -->
 	</div>
 	<div class="orderTotalView container">
-		<form action="" method="post">
+		<form action="../Cart/Cart.jsp" method="post">
 			<table class="table">
 				<tr>
 					<td class="col-12 text-nowrap text-center">주문내역입니다.</td>
@@ -422,6 +442,7 @@ List<CondimentDTO> condimentLists3 = dao.selectFindCountCount(request.getParamet
 
 	<script type="text/javascript">
 		// 주문 시 빠진 입력이 존재 할 경우 경고창을 출력해주는 메서드 --> false시 나타나므로 jsp로 이동이 안됨.
+		
 		function orderValidate(form) {
 			if (!form.menu_name.value) {
 				alert("메뉴를 입력하세요");

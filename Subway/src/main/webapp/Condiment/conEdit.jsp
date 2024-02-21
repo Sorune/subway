@@ -53,7 +53,7 @@ function deletePost(){
 </script>
 </head>
 <body>
-<jsp:include page="./conHeadLink.jsp"/>
+<jsp:include page="../Main/MenuListBootStrap.jsp"/>
 <h2>상품정보 게시판 - 수정하기(Edit)</h2>
 <form name="insertForm" method="post" action="conEditProcess.jsp"
 	onsubmit="return validateForm(this);">

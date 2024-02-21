@@ -12,7 +12,7 @@
 	//DTO 객체 생성(OrderDTO)
 	OrderDTO dto = new OrderDTO();
 	// DAO 객체 생성(CondimentDAO)
-	CondimentDAO cdao = new CondimentDAO();
+	CondimentDAO cdao = new CondimentDAO(application);
 	// DAO 객체 생성(OrderDAO)
 	OrderDAO dao = new OrderDAO();	
 	

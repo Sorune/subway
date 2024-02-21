@@ -3,6 +3,7 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,31 @@ public class OrderDAO extends JDBConnect {
 	private List<OrderDTO> listMenu = new Vector<OrderDTO>(); // 컨디먼트 테이블에서 받은 정보 메뉴로 출력하기 위한 배열 객체 생성
 	private ArrayList<CondimentDAO> condimentDAO = new ArrayList<CondimentDAO>(); // 컨디먼트 테이블에서 받을 정보 담을 배열 객체 생성
 	private ArrayList<CondimentDTO> condimentDTO = new ArrayList<CondimentDTO>(); // 컨디먼트 테이블에서 받을 정보 담을 배열 객체 생성
-
+	
+	
+	public CondimentDTO selectCon(String menu_id) {
+		
+		CondimentDTO dto = new CondimentDTO();
+		
+		try {
+			String query = "select * from condiment where menu_id = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, menu_id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setConCount(rs.getInt("con_count"));
+				dto.setConKind(rs.getString("con_kind"));
+				dto.setConPrice(rs.getInt("con_price"));
+				dto.setConName(rs.getString("con_name"));
+				dto.setMenuId(rs.getInt("menu_id"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 	// 전체 게시물 목록을 반환합니다.
 	public List<CondimentDTO> selectList(Map<String, Object> map) {
 		List<CondimentDTO> bbs = new Vector<CondimentDTO>(); // 결과(게시물 목록)를 담을 변수
@@ -34,7 +59,7 @@ public class OrderDAO extends JDBConnect {
 				// 한 행(게시물 하나)의 내용을 DTO에 저장
 				CondimentDTO dto = new CondimentDTO();
 
-				dto.setConCount(rs.getInt("menu_id"));
+				dto.setConCount(rs.getInt("con_count"));
 				dto.setConKind(rs.getString("con_kind"));
 				dto.setConPrice(rs.getInt("con_price"));
 				dto.setConName(rs.getString("con_name"));
@@ -132,7 +157,8 @@ public class OrderDAO extends JDBConnect {
 	public int findCount(String kind) {
 		int totalcount = 0;
 		String query = "select count(*) from condiment where con_kind = ?";
-
+		System.out.println(query);
+		System.out.println(kind);
 		try {
 			pstmt = con.prepareStatement(query); 	// 쿼리문 생성
 			pstmt.setString(1, kind);
