@@ -24,6 +24,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="../Main/main.jsp">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="../Login/LoginForm.jsp">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../Order/Order.jsp">Order</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="# role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Condiments</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
