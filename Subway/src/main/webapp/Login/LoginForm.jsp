@@ -42,12 +42,17 @@
 	memberDTO dto = new memberDTO();
 	
 	if (session.getAttribute("admin_id")!= null) { //로그인 성공시 출력용
-		response.sendRedirect("../Main/main.jsp");
+	%>
+	<script>
+	alert("관리자님 환영합니다!");
+	location.href="../Main/main.jsp";
+	</script>
+<%	
 	} else {
 		if (session.getAttribute("user_id") == null){ //로그인 상태 확인
 	%>
-<div class="card mb-4">
-<div class="card-body input-group justify-content-center" align="center" >
+<div class="card mb-4" align="center">
+<div class="card-body input-group justify-content-center" align="center">
 	<form class="mb-3" action="loginProcess.jsp" method="post" name="loginFrm"
 		onsubmit="return validateForm(this);">
 		<div class="row">
@@ -62,17 +67,24 @@
 				<input id="password"	type="password" class="form-control" name="user_pass" /> <br>
 			</div>
 		</div>
-		<div class="row">
-			<button class="btn btn-primary" type="submit" align="right">로그인하기</button>
+		<div class="row d-flex">
+			<input class="btn btn-primary" type="submit"  value="로그인"></input>
 		</div>
-	</form>
+		<br/>
+		<a href="../Register/Register.jsp">회원가입</a>
+		</form>
 </div>
 </div>
 <!-- 로그인 폼 -->
 <%
 
 	} else {
-		response.sendRedirect("../Main/main.jsp");
+		%>
+		<script>
+		alert("<%= session.getAttribute("user_id") %>님 환영합니다!");
+		location.href = "../Main/main.jsp";
+		</script>
+		<%
 		}
 	}
 %>

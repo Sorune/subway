@@ -14,10 +14,6 @@ String pass = dto.getUser_Pass();
 String phone = dto.getUser_Phone();
 String add = dto.getUser_Add();
 
-System.out.println(id);
-System.out.println(pass);
-System.out.println(phone);
-System.out.println(add);
 dao.close();
 
 %>

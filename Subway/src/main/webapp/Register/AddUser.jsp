@@ -6,12 +6,11 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><title>Insert title here</title></head>
 <body>
 	<%
-	JDBConnect jdbc = new JDBConnect();
 	request.setCharacterEncoding("utf-8");
 		
 	UserDTO dto = new UserDTO();	
 	String id = request.getParameter("id");
-	String pass = request.getParameter("pass");
+	String pass = request.getParameter("password");
 	String name = request.getParameter("name");
 	String phone = request.getParameter("phone");
 	String add = request.getParameter("add");
@@ -23,7 +22,16 @@
 	dto.setUser_Add(add);
 	
 	UserDAO dao = new UserDAO(application);
-	dao.createUser(dto);
+	int result = dao.createUser(dto);
+	if (result > 0){
+		%>
+			<script>
+			alert('가입되었습니다.');
+			location.href="../Login/LoginForm.jsp";
+			</script>
+		<%
+		
+	}
 	%>
 
 </body>

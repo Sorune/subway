@@ -40,22 +40,22 @@ public class UserDAO extends JDBConnect {
 	      return dto;
 	   }
 	   
-	@SuppressWarnings("null")
-	public void createUser(UserDTO dto) {
-		
+   
+	public int createUser(UserDTO dto) {
+		int result = 0;
 		try {
 			String sql = " INSERT INTO member(user_id, user_pass, user_name, user_phone, user_add) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
-
+			
 			pstmt.setString(1, dto.getUser_Id());
 			pstmt.setString(2, dto.getUser_Pass());
 			pstmt.setString(3, dto.getUser_Name());
 			pstmt.setString(4, dto.getUser_Phone());
 			pstmt.setString(5, dto.getUser_Add());
 			
-			int n = pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 
-			if (n > 0) {
+			if (result > 0) {
 				System.out.println(dto.getUser_Id() + "님 가입 완료되었습니다.");
 				con.commit();
 			} else {
@@ -66,6 +66,7 @@ public class UserDAO extends JDBConnect {
 			e.printStackTrace();
 		}
 		
+		return result;
 	}
 	public int checkId(String id) {
 		int result = 0;
