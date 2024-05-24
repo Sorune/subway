@@ -2,6 +2,7 @@
 온라인 주문 시스템 구축 프로젝트입니다. JSP기반으로 작성되었습니다.
 - **server1** : http://mbc-webcloud.iptime.org:8013/Subway/Main/main.jsp
 - **관리자 계정** : ezManager/manage1
+- **발표 자료** : https://docs.google.com/presentation/d/1TVuWjUtg9MLNVM6JP3sOeCbWBJFdsC89/edit?usp=sharing&ouid=116141867798055769977&rtpof=true&sd=true
 
 ## 🌟프로젝트 개요
 샌드위치 음식 주문 프로젝트로, 재고 관리 주문 기능등을 구현하였습니다.
